@@ -1,0 +1,35 @@
+{% extends "routines/routine_base.html" %}
+{% block routine_content %}
+  <div class="col-md-12">
+    <!-- Routine -->
+    <div class="jumbotron">
+      <h1 class='display-4'>{{ routine.name }}</h1>
+
+      <!-- Routine Buttons -->
+      {% if user.is_authenticated %}
+        <a class="btn btn-success" href="{% url 'routines:exercise_new'%}">Create Exercise</a>
+        <a class="btn btn-warning" href="{% url 'routines:routine_edit' pk=routine.pk %}">Edit</a>
+        <a class="btn btn-danger" href="{% url 'routines:routine_remove' pk=routine.pk %}">Remove</a>
+      {% endif %}
+
+      <hr>
+
+      <!-- Exercise -->
+      <h2>Exercises:</h2>
+
+      {% for exercise in routine.exercises.all %}
+        <br>
+        <p><strong>{{exercise.name}}</strong> ({{ exercise.reps }} repetitions - {{exercise.weight}}kg)
+          <!-- Exercise Buttons -->
+          {% if user.is_authenticated %}
+            <a class="btn btn-warning btn-sm" href="{% url 'routines:exercise_edit' pk=exercise.pk %}">Edit</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'routines:exercise_remove' pk=exercise.pk %}">Remove</a>
+          {% endif %}
+        </p>
+      {% empty %}
+        <p>No exercises</p>
+      {% endfor %}
+    </div>
+
+  </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "routines/routine_base.html" %}
+
+
+{% block routine_content %}
+  <div class="col-md-8">
+    <div class="jumbotron">
+      <h2>Please Login:</h2>
+      <h3>(Must be SuperUser, please check with the site admin)</h3>
+
+      {% if form.errors %}
+        <p>Username/Password combination invalid</p>
+      {% endif %}
+
+      <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" class="btn btn-primary" value="Login">
+          <input type="hidden" name="next" value="{{next}}">
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="container full-routine">
+    <div class="row">
+      {% block preroutine %}{% endblock %}
+      {% block routine_content %}{% endblock %}
+      {% block routine_post %}{% endblock %}
+    </div>
+  </div>
+
+{% endblock %}
